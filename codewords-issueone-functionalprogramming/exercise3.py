@@ -3,7 +3,7 @@ from timeit import timeit
 # Fisher-Yates Shuffle
 
 #### Imperative
-print timeit("""
+# print timeit("""
 def shuffleImperative(unshuffledlist):
     from random import randint
     for i in range(len(unshuffledlist)-1,-1,-1):
@@ -13,22 +13,33 @@ def shuffleImperative(unshuffledlist):
         unshuffledlist[i] = t
     return unshuffledlist
 a = shuffleImperative(range(50))
-""")
-# print unshuffledlist
-
+# """)
+# print a
 #### Declerative
-print timeit("""
+# print timeit("""
 def swap(l, s1, s2):
-    l = list(l)
-    l[s1], l[s2] = l[s2], l[s1]
-    return l
+    if s1 == s2:
+        return l
+    elif s1 > s2:
+        s2,s1 = s1,s2
+    ln = l[0:s1]+l[s2:s2+1]+l[s1+1:s2]+l[s1:s1+1]+l[s2+1:]
+    # l = list(l)
+    # l[s1], l[s2] = l[s2], l[s1]
+    # print ln, s1, s2
+    return ln
+# def swap(l, s1, s2):
+#     l = list(l)
+#     l[s1], l[s2] = l[s2], l[s1]
+#     return tuple(l)
 
 def shuffleDeclerative(l):
     from random import randint
     r = len(l)
+    # print l
     return reduce(lambda a,x: swap(a, x, randint(0,x)), range(r-1,-1,-1), l)
 
-a = shuffleDeclerative(range(50))
-""")
+a = shuffleDeclerative(tuple(range(50)))
+# """)
 
-# print shuffle2(a)
+# print swap(tuple(range(5)), 3, 2)
+# print a
