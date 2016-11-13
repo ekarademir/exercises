@@ -1,10 +1,11 @@
 def shuffle_imperative(unshuffledlist):
     from random import randint
+    #print range(len(unshuffledlist)-1,-1,-1)
     for i in range(len(unshuffledlist)-1,-1,-1):
         shuffleindex = randint(0, i)
-        t = unshuffledlist[shuffleindex]
-        unshuffledlist[shuffleindex] = unshuffledlist[i]
-        unshuffledlist[i] = t
+        #print shuffleindex
+        unshuffledlist[shuffleindex],unshuffledlist[i] \
+                    = unshuffledlist[i],unshuffledlist[shuffleindex]
     return unshuffledlist # now shuffled ofcourse
 
 def swap_tuple(l, s1, s2):
