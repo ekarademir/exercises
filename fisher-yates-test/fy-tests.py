@@ -84,18 +84,18 @@ if __name__ == "__main__":
                    shuffle_declarative_list, \
                    shuffle_declarative_tuple, \
                    shuffle_deck
-    scale_test()
+    # scale_test()
 
     ### Fairness test
-    # fm = test_fairness(shuffle_deck)
-    # occurancescol = [sum(fm[:,x]) for x in range(len(fm[0,:]))]
-    # occurancesrow = [sum(fm[x,:]) for x in range(len(fm[:,0]))]
-    # print fm/occurancescol[0]
-    # print occurancescol
-    # print occurancesrow
-    # plt.imshow(fm/occurancescol[0], extent = [0,5,0,5], interpolation='none')
-    # plt.colorbar()
-    # plt.show()
+    fm = test_fairness(shuffle_deck)
+    occurancescol = [sum(fm[:,x]) for x in range(len(fm[0,:]))]
+    occurancesrow = [sum(fm[x,:]) for x in range(len(fm[:,0]))]
+    print fm/occurancescol[0]
+    print occurancescol
+    print occurancesrow
+    plt.imshow(fm/occurancescol[0], extent = [0,5,0,5], interpolation='none')
+    plt.colorbar()
+    plt.show()
 
     # print profile_test(test = 'declarativetuple')
     # print shuffle_deck(range(5))

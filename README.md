@@ -10,3 +10,6 @@ Few timing tests I'm running on the shuffling algorithm. I'm comparing imperativ
 
 # dublin-airport-challenge
 Exploratory codes for Dublin Airport Hackathon BUILDchallenge. [GitHub page of the Challenge](https://github.com/rapidanalytics/Dublin-Airport-Challenge). Can't share the dataset.
+
+# genetic_search
+Writing quotes from Shakespeare by bashing on the typewriter. Fittest basher wins.

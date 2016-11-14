@@ -37,6 +37,7 @@ def pick_place(remainingdeck,accumulationgdeck):
     if not remainingdeck:
         return accumulationgdeck
 
+    # print accumulationgdeck
     position = randint(0,len(accumulationgdeck))
     accumulationgdeck = accumulationgdeck[0:position] \
                             +remainingdeck[0:1] \
