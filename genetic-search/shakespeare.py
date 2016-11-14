@@ -1,3 +1,5 @@
+# For python v3.5
+
 import string
 from random import randint, choice
 
