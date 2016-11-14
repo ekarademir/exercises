@@ -10,7 +10,9 @@ aimperative = shuffle_imperative(range({0}))""".format(decksize),
     'declarativetuple': """from fy import shuffle_declarative_tuple
 adeclarativetuple = shuffle_declarative_tuple(range({0}))""".format(decksize),
     'declarativelist': """from fy import shuffle_declarative_list
-adeclarativelist = shuffle_declarative_list(range({0}))""".format(decksize)
+adeclarativelist = shuffle_declarative_list(range({0}))""".format(decksize),
+    'shuffledeck': """from fy import shuffle_deck
+adeclarativelist = shuffle_deck(range({0}))""".format(decksize)
     }
     result = timeit(teststrs[test], number=number)
     print test, decksize, number, result
@@ -24,7 +26,9 @@ aimperative = shuffle_imperative(range({0}))""".format(decksize),
     'declarativetuple': """from fy import shuffle_declarative_tuple
 adeclarativetuple = shuffle_declarative_tuple(range({0}))""".format(decksize),
     'declarativelist': """from fy import shuffle_declarative_list
-adeclarativelist = shuffle_declarative_list(range({0}))""".format(decksize)
+adeclarativelist = shuffle_declarative_list(range({0}))""".format(decksize),
+    'shuffledeck': """from fy import shuffle_deck
+adeclarativelist = shuffle_deck(range({0}))""".format(decksize)
     }
     result = cProfile.run(teststrs[test])
     # print test, decksize, number, result
@@ -33,13 +37,15 @@ adeclarativelist = shuffle_declarative_list(range({0}))""".format(decksize)
 def scale_test():
     scalefactor = np.linspace(5,500,20)
     timperative = [time_tests(test = 'imperative',decksize=int(x)) for x in scalefactor]
-    tdeclarativetuple = [time_tests(test = 'declarativetuple',decksize=int(x)) for x in scalefactor]
-    tdeclarativelist = [time_tests(test = 'declarativelist',decksize=int(x)) for x in scalefactor]
+    # tdeclarativetuple = [time_tests(test = 'declarativetuple',decksize=int(x)) for x in scalefactor]
+    # tdeclarativelist = [time_tests(test = 'declarativelist',decksize=int(x)) for x in scalefactor]
+    tshuffledeck = [time_tests(test = 'shuffledeck',decksize=int(x)) for x in scalefactor]
     # print scalefactor, time
     with plt.style.context('fivethirtyeight'):
         plt.plot(scalefactor, timperative, label=u"Imperative")
-        plt.plot(scalefactor, tdeclarativetuple, label=u"Declarative Tuple")
-        plt.plot(scalefactor, tdeclarativelist, label=u"Declarative List")
+        # plt.plot(scalefactor, tdeclarativetuple, label=u"Declarative Tuple")
+        # plt.plot(scalefactor, tdeclarativelist, label=u"Declarative List")
+        plt.plot(scalefactor, tshuffledeck, label=u"New Shuffle Deck")
     ax = plt.gca()
     ax.legend(loc='upper center')
     plt.xlabel('Deck Size')
@@ -74,11 +80,14 @@ def test_fairness(style):
 
 
 if __name__ == "__main__":
-    # scale_test()
+    from fy import shuffle_imperative, \
+                   shuffle_declarative_list, \
+                   shuffle_declarative_tuple, \
+                   shuffle_deck
+    scale_test()
 
     ### Fairness test
-    # from fy import shuffle_imperative, shuffle_declarative_list, shuffle_declarative_tuple
-    # fm = test_fairness(shuffle_declarative_tuple)
+    # fm = test_fairness(shuffle_deck)
     # occurancescol = [sum(fm[:,x]) for x in range(len(fm[0,:]))]
     # occurancesrow = [sum(fm[x,:]) for x in range(len(fm[:,0]))]
     # print fm/occurancescol[0]
@@ -89,3 +98,4 @@ if __name__ == "__main__":
     # plt.show()
 
     # print profile_test(test = 'declarativetuple')
+    # print shuffle_deck(range(5))

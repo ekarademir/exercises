@@ -30,3 +30,23 @@ def shuffle_declarative_list(l):
     from random import randint
     r = len(l)
     return reduce(lambda a,x: swap_list(a, x, randint(0,x)), range(r-1,-1,-1), l)
+
+def pick_place(remainingdeck,accumulationgdeck):
+    # from random import random
+    from random import randint
+    if not remainingdeck:
+        return accumulationgdeck
+
+    position = randint(0,len(accumulationgdeck))
+    accumulationgdeck = accumulationgdeck[0:position] \
+                            +remainingdeck[0:1] \
+                            +accumulationgdeck[position:]
+    # print position, accumulationgdeck
+    return pick_place(remainingdeck[1:],accumulationgdeck)
+    # if random() >= 0.5:
+    #     return pick_place(remainingdeck[1:],remainingdeck[0:1]+accumulationgdeck)
+    # else:
+    #     return pick_place(remainingdeck[1:],accumulationgdeck+remainingdeck[0:1])
+
+def shuffle_deck(deck):
+    return pick_place(deck,[])
