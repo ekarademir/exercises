@@ -134,7 +134,7 @@ def shuffle_list(unshuffledlist):
 def mutate_device(devicematrix):
     """Introduces number of mutations in the given device matrix."""
     sh = np.shape(devicematrix)
-    mutationtimes = int(randint(0,sh[0]*sh[1]-1)*0.005)
+    mutationtimes = int(randint(0,sh[0]*sh[1]-1)*0.005*2.0)
     for i in range(mutationtimes):
         mutationrow = randint(0,sh[0]-1)
         mutationcol = randint(0,sh[1]-1)
@@ -198,7 +198,7 @@ def genetic_search(maxgeneration=1000000, targetscore=1.98):
     """Implements a Genetic search"""
 
     genepool = []
-    genepoolsize = 6
+    genepoolsize = 10
 
 
     # create the first generation. List of matrices
@@ -223,7 +223,7 @@ def genetic_search(maxgeneration=1000000, targetscore=1.98):
 
         # Report the best score in this generation
         print('Generation', k, evaluatedgenepool[-1][1])
-        
+
         # test new gene pool. list of result dictionaries
         testedgenepool = list(map(lambda x: test_device(x), genepool))
 
@@ -237,5 +237,5 @@ def genetic_search(maxgeneration=1000000, targetscore=1.98):
 
 
 if __name__ == '__main__':
-    for x in genetic_search(maxgeneration=10000, targetscore=1.989):
+    for x in genetic_search(maxgeneration=10000, targetscore=1.999):
         printmatrix(x)

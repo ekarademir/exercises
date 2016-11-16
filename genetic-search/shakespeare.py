@@ -35,7 +35,7 @@ def mutation(gene):
 
     # How many times we should mutate a gene.
     # Each mutation has 20% probability
-    mutationtimes = int(randint(0,len(gene)-1)*0.2)
+    mutationtimes = int(randint(0,len(gene)-1)*0.05)
 
     # Execute mutations.
     for i in range(mutationtimes):
@@ -53,7 +53,7 @@ def genetic_search():
 
     # Choose a generation size.
     # Number of chromosomes is the length of the string because, why not?
-    generationsize = 18*4
+    generationsize = 18
     nchromosom = len(target)
 
     # Create the first generation
@@ -70,6 +70,74 @@ def genetic_search():
         # Choose best two
         best1 = generation[-1]
         best2 = generation[-2]
+
+        # If the correct solution is found, then stop searching.
+        if best1[1] == nchromosom:
+            print("Solution found! in generation", k)
+            return best1
+
+        print(best1[0], best1[1])
+
+        # Cross and generate the next generation
+        newgeneration = []
+        for i in range(generationsize):
+            offspring = ''
+            for j in range(nchromosom):
+                offspring = offspring + choice([best1[0][j], best2[0][j]])
+
+            # Mutation
+            offspring = mutation(offspring)
+
+            newgeneration.append(offspring)
+
+        # Sort the new generation and repeat the whole process again.
+        generation = sorted([(x, fitness(x, target)) for x in newgeneration],
+                        key=lambda individual: individual[1])
+
+    return generation
+
+def genetic_search_wheel():
+    """Implements a Genetic search with more diversity. Which means
+    every member of the population have some chance to breed."""
+
+    target = "to be or not to be that is the question"
+
+    # Choose a generation size.
+    # Number of chromosomes is the length of the string because, why not?
+    generationsize = 18
+    nchromosom = len(target)
+
+    # Create the first generation
+    generation = [generate_random_individual(nchromosom) for x in range(generationsize)]
+
+    # Evaluate the fitness and pair the fitness value with offspring
+    # via tuples. Then sort them according to fitness metric.
+    generation = sorted([(x, fitness(x, target)) for x in generation],
+                    key=lambda individual: individual[1])
+
+    # Generations are created limited times.
+    # Just in case something goes horribly wrong.
+    for k in range(50000):
+
+        times = [1 for x in range(generationsize)]
+        times[-1] = 40
+        times[-2] = 35
+        times[-3] = 10
+        times[-4] = 5
+        times[0] = 0
+        times[1] = 0
+        times[2] = 0
+        times[3] = 0
+
+        # Throw each gene into a bag. Throw times amount of copy
+        bag = []
+        for i in range(generationsize):
+            for j in range(times[i]):
+                bag.append(i)
+
+        # Choose two random genes from the bag
+        best1 = generation[choice(bag)]
+        best2 = generation[choice(bag)]
 
         # If the correct solution is found, then stop searching.
         if best1[1] == nchromosom:
@@ -167,4 +235,4 @@ def genetic_search_diverse():
 
 if __name__ == '__main__':
 
-    print(genetic_search_diverse())
+    print(genetic_search_wheel())
