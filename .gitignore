@@ -2,6 +2,7 @@
 data.zip
 dublin-airport-challenge/*.csv
 *~
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
