@@ -1,5 +1,7 @@
+*.apikey
 data.zip
 dublin-airport-challenge/*.csv
+*~
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

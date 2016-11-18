@@ -172,6 +172,8 @@ def choose_parents(evaluatedgenepool):
     times[-2] = 15
     times[-3] = 4
     times[-4] = 2
+    times[0] = 0
+    times[1] = 0
 
     # Throw each gene into a bag. Throw times amount of copy
     bag = []
@@ -223,6 +225,7 @@ def genetic_search(maxgeneration=1000000, targetscore=1.98):
 
         # Report the best score in this generation
         print('Generation', k, evaluatedgenepool[-1][1])
+        printmatrix(evaluatedgenepool[-1][0]['device'])
 
         # test new gene pool. list of result dictionaries
         testedgenepool = list(map(lambda x: test_device(x), genepool))
