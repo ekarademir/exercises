@@ -3,6 +3,7 @@ data.zip
 dublin-airport-challenge/*.csv
 *~
 *.zip
+kaggle/stack-exchange-tags/*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
