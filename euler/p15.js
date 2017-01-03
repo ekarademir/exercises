@@ -7,18 +7,19 @@ How many such routes are there through a 20×20 grid?
 
 'use strict';
 
-var n = 1;
+/*
+for nxn lattice we have n down moves and n left moves
+so number of distict ways wouldbe permutation of these
+moves
 
-var levels = n + 2;
+number of unique ways = (n^2)!/n!/n!
 
-var mid = (levels-1)/2;
-
-var branches = [];
-
-var nodes = 1;
-
-for(let level = 0; level <levels; level++) {
-  
+*/
+function factorial(n) {
+  let f = 1;
+  for(let i = 1; i <= n; i++)
+    f *= i;
+  return f;
 }
 
-console.log(count-1);
+console.log(factorial(40)/factorial(20)/factorial(20));
